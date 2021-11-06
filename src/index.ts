@@ -1,5 +1,8 @@
-import { readFile } from 'fs/promises';
+import { promisify } from 'util';
+import { readFile as _readFile } from 'fs';
 import { join } from 'path';
+
+const readFile = promisify(_readFile);
 
 import { DeviceTree, NodePath } from './types';
 import DeviceTreeParser from './parser';
