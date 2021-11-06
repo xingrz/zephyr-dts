@@ -11,6 +11,53 @@ A library for parsing DeviceTree from [Zephyr](https://github.com/zephyrproject-
 npm install zephyr-dts --save
 ```
 
+## Usage
+
+This library loads DTS from Zephyr's `build` directory:
+
+```ts
+import { loadDT } from 'zephyr-dts';
+
+const dt = await loadDT('/path/to/zephyr/build');
+
+const flash = dt.choose('zephyr,flash');
+const partitions = dt.under(`${flash.path}/partitions`);
+for (const part of partitions) {
+  const reg = part.reg![0]!;
+  console.log(`part ${part.label} - addr: ${reg.addr}, size: ${reg.size}`);
+}
+```
+
+## APIs
+
+```ts
+function loadDT(buildDir: string): Promise<DeviceTreeParser>;
+
+interface DeviceTreeParser {
+  choose(name: string): Node | null;
+  label(label: string): Node | null;
+  node(path: NodePath): Node | null;
+  under(parent: NodePath): Node[];
+}
+
+interface Node {
+  path: string;
+  compatible?: string[];
+  label?: string;
+  reg?: Register[];
+  status?: 'okay' | 'disabled';
+  interrupts?: number[];
+  properties: Record<string, string>;
+}
+
+type NodePath = string;
+
+interface Register {
+  addr: number;
+  size: number;
+}
+```
+
 ## License
 
 [MIT License](LICENSE)
