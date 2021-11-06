@@ -25,7 +25,7 @@ export interface Node {
 }
 
 export interface Register {
-  addr: number;
+  addr?: number;
   size?: number;
 }
 

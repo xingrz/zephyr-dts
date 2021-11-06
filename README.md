@@ -54,7 +54,7 @@ interface Node {
 type NodePath = string;
 
 interface Register {
-  addr: number;
+  addr?: number;
   size?: number;
 }
 ```

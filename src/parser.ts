@@ -103,7 +103,10 @@ function populate(dt: DeviceTree, nodes: Record<NodePath, Node>): void {
       const sizes = values(regs['SIZE']);
       node.reg = [];
       for (let i = 0; i < num; i++) {
-        node.reg[i] = { addr: parseInt(addrs[i]) };
+        node.reg[i] = {};
+        if (addrs[i] != 'NONE') {
+          node.reg[i].addr = parseInt(addrs[i]);
+        }
         if (sizes[i] != 'NONE') {
           node.reg[i].size = parseInt(sizes[i]);
         }
