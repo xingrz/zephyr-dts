@@ -1,0 +1,35 @@
+{
+  "name": "zephyr-dts",
+  "version": "1.0.0",
+  "description": "A library for parsing DeviceTree from Zephyr",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "jest",
+    "prepublishOnly": "rm -rf lib && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xingrz/zephyr-dts.git"
+  },
+  "keywords": [
+    "zephyr",
+    "devicetree",
+    "dt",
+    "dts"
+  ],
+  "author": "XiNGRZ <hi@xingrz.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xingrz/zephyr-dts/issues"
+  },
+  "homepage": "https://github.com/xingrz/zephyr-dts#readme",
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.6",
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4"
+  }
+}
