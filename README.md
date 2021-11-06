@@ -21,10 +21,11 @@ import { loadDT } from 'zephyr-dts';
 const dt = await loadDT('/path/to/zephyr/build');
 
 const flash = dt.choose('zephyr,flash');
-const partitions = dt.under(`${flash.path}/partitions`);
-for (const part of partitions) {
-  const reg = part.reg![0]!;
-  console.log(`part ${part.label} - addr: ${reg.addr}, size: ${reg.size}`);
+if (flash) {
+  for (const part of dt.under(`${flash.path}/partitions`)) {
+    const reg = part.reg![0]!;
+    console.log(`part ${part.label} - addr: ${reg.addr}, size: ${reg.size}`);
+  }
 }
 ```
 
