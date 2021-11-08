@@ -8,9 +8,20 @@ test('loadDT()', async () => {
   expect(dt).toBeTruthy();
   expect(dt.chosens).toBeInstanceOf(Object);
   expect(dt.nodes).toBeInstanceOf(Array);
+  expect(dt.nodes.length).toBeGreaterThan(0);
   expect(dt.nodeLabels).toBeInstanceOf(Object);
   expect(dt.props).toBeInstanceOf(Object);
   expect(dt.regs).toBeInstanceOf(Object);
+});
+
+test('loadDT() with CRLF', async () => {
+  const dt = await loadDT(join(FIXTURES_DIR, 'crlf'));
+  expect(dt.nodes).toBeInstanceOf(Array);
+  expect(dt.nodes.length).toBeGreaterThan(0);
+});
+
+test('loadDT() with directory not exists', async () => {
+  await expect(loadDT(join(FIXTURES_DIR, 'not-found'))).rejects.toThrow(/ENOENT/);
 });
 
 describe('class DeviceTreeParser', () => {
