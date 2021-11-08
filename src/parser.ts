@@ -39,9 +39,11 @@ export default class DeviceTreeParser implements IDeviceTreeParser, DeviceTree {
   }
 }
 
+const REG_CMAKE_PROP = /^set_target_properties\(devicetree_target PROPERTIES \"([^\"]+)\" (.+)\)$/;
+
 function parse(dt: DeviceTree, document: string): void {
   for (const line of document.split('\n')) {
-    if (!line.match(/^set_target_properties\(devicetree_target PROPERTIES \"([^\"]+)\" (.+)\)$/)) continue;
+    if (!line.trim().match(REG_CMAKE_PROP)) continue;
     const [cmakeType, ...cmakeKeys] = RegExp.$1.split('|');
     const cmakeValue = RegExp.$2;
     switch (cmakeType) {
